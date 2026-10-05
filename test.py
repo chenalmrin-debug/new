@@ -1,5 +1,4 @@
 hi
 hi
-print("hello")
-חצםלפךג/ך
-
+print("hello")/ך
+print("basic beach")
