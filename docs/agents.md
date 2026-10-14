@@ -1,24 +1,33 @@
 # Agent store
 
-כל הסוכנים הייחודיים נשמרים כאן, כקבצי Markdown ב-`.claude/agents/` ש-Claude Code טוען אוטומטית.
+אזור מסודר ליצירה ושמירה של סוכנים ייעודיים. אפשר ליצור סוכן עוד לפני שהמטרה שלו הוגדרה.
 
-## סוכנים
-| סוכן | תיאור | כלים | שירותים |
+## מבנה
+| מיקום | משמעות | נטען ע"י Claude? |
+|---|---|---|
+| `agents/drafts/` | טיוטות - מטרה עדיין לא הוגדרה | לא |
+| `.claude/agents/` | סוכנים פעילים | כן |
+| `agents/archive/` | סוכנים שיצאו משימוש (לא נמחקים) | לא |
+| `templates/agent.md.tmpl` | תבנית לסוכן חדש | – |
+
+## תהליך
+1. `/new-agent <שם>` - יוצר טיוטה (מטרה = `TBD` אם לא ידועה).
+2. עורכים את `agents/drafts/<שם>.md`: מטרה, אישיות, כלים, שירותים.
+3. `/activate-agent <שם>` - מעביר ל-`.claude/agents/` (מופיע בסשן חדש).
+4. `/archive-agent <שם>` - מעביר לארכיון כשלא צריך יותר.
+
+## אינדקס
+| סוכן | סטטוס | תיאור | שירותים |
 |---|---|---|---|
-| `grok-bot` | פרסונה עוקצנית וישירה בסגנון Grok | קריאה + חיפוש | – |
-| `api-connector` | קריאות HTTP API לכל שירות | Bash, Read, WebFetch | כל API (לפי `docs/services.md`) |
-
-## הוספת סוכן
-`/new-agent` (skill), או העתיקו את `templates/agent.md.tmpl` ל-`.claude/agents/<name>.md`.
-שדה `description` קובע מתי Claude יאציל לסוכן - כתבו אותו ספציפי.
+| `grok-bot` | active | פרסונה עוקצנית וישירה בסגנון Grok | – |
+| `api-connector` | active | קריאות HTTP API לכל שירות (לפי `docs/services.md`) | כל API |
 
 ## חיבור לשירותים
-1. **MCP (מועדף)** - הוסיפו שרת ל-`.mcp.json`, והגבילו סוכן מסוים אליו עם `mcpServers:` ב-frontmatter שלו:
+1. **MCP (מועדף)** - הוסיפו שרת ל-`.mcp.json` והגבילו סוכן אליו עם `mcpServers:` ב-frontmatter:
    ```json
    {"mcpServers": {"github": {"type": "http", "url": "https://api.githubcopilot.com/mcp/",
                               "headers": {"Authorization": "Bearer ${GITHUB_TOKEN}"}}}}
    ```
-2. **HTTP API ישיר** - תעדו את השירות ב-`docs/services.md`; הסוכן `api-connector` מבצע את הקריאות.
+2. **HTTP API ישיר** - תעדו ב-`docs/services.md`; `api-connector` מבצע את הקריאות.
 
-סודות: רק במשתני סביבה (`${VAR}`), לעולם לא בקבצים או ב-commit.
-פעולות שמשנות מצב (שליחה, יצירה, מחיקה) דורשות אישור המשתמש.
+סודות: רק משתני סביבה (`${VAR}`), לעולם לא בקבצים או ב-commit. פעולות שמשנות מצב דורשות אישור המשתמש.
