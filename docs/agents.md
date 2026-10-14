@@ -21,6 +21,7 @@
 |---|---|---|---|
 | `grok-bot` | active | פרסונה עוקצנית וישירה בסגנון Grok | – |
 | `api-connector` | active | קריאות HTTP API לכל שירות (לפי `docs/services.md`) | כל API |
+| `gils-work` | draft | Gil's work - מטרה טרם הוגדרה | – |
 
 ## חיבור לשירותים
 1. **MCP (מועדף)** - הוסיפו שרת ל-`.mcp.json` והגבילו סוכן אליו עם `mcpServers:` ב-frontmatter:
