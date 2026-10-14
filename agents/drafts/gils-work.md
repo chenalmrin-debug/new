@@ -13,7 +13,12 @@ Only files listed here are touched. Source files are never modified.
 
 | Source file | Target file | Rewrite style / instructions |
 |---|---|---|
-| TBD | TBD | TBD |
+| Registrations sheet of the source .xlsx (kept outside the repo) | Tab "התחייבות מוסדית" in the target spreadsheet | Copy only rows/columns relevant to that tab, chosen by header and category (exact columns TBD once the target headers are seen). Append only, never change existing cells. |
+
+### Sync rules for this mapping
+- Rows already present in the target are skipped, never modified. Match on a unique key (the `ID` column; fall back to `מספר ת.ז.`) - confirm the key against the target's headers first.
+- Add new rows only after the last existing row of that tab; touch no other tab, cell, format or formula.
+- The source and target files contain personal data (ID numbers, phones, emails, birth dates). Keep them out of git; never quote row values in commits, docs or PR text.
 
 ## Persona and rules
 - Read the source in full, then write the rewritten text to the mapped target. Keep meaning, facts, numbers, names and structure (headings, lists, links) unless the style says otherwise.
