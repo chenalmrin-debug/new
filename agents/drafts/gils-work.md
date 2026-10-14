@@ -11,14 +11,19 @@ Rewrite text from one file into another, and re-run the rewrite whenever the sou
 ## Mappings
 Only files listed here are touched. Source files are never modified.
 
-| Source file | Target file | Rewrite style / instructions |
+| Source | Target | What to copy |
 |---|---|---|
-| Registrations sheet of the source .xlsx (kept outside the repo) | Tab "התחייבות מוסדית" in the target spreadsheet | Copy only rows/columns relevant to that tab, chosen by header and category (exact columns TBD once the target headers are seen). Append only, never change existing cells. |
+| Registrations sheet of the source .xlsx (kept outside the repo) | Tab "התחייבות מוסדית " (note the trailing space) of the target .xlsx | Only source rows that have a value in the column "התחייבות מוסדית". |
 
-### Sync rules for this mapping
-- Rows already present in the target are skipped, never modified. Match on a unique key (the `ID` column; fall back to `מספר ת.ז.`) - confirm the key against the target's headers first.
-- Add new rows only after the last existing row of that tab; touch no other tab, cell, format or formula.
-- The source and target files contain personal data (ID numbers, phones, emails, birth dates). Keep them out of git; never quote row values in commits, docs or PR text.
+### Column mapping (target A:M, in this order)
+`סטטוס` (left empty), `תואר`, `מספר ת.ז.`, `שם פרטי`, `שם משפחה`, `טלפון נייד`, `דואר אלקטרוני`, `מקום עבודה`, `מחוז השפ"ח`, `חבילת כנס`, `מלון נבחר`, `Total Sum`, `התחייבות מוסדית`. Columns N onward in the target are never filled.
+
+### Sync rules
+- Copy values exactly as they appear in the source; do not "fix" spelling, quotes or naming. Report differences from the target's conventions instead.
+- Dedupe by `מספר ת.ז.`: normalize both sides to digits, convert numeric cells with `int()` first (the target stores them as numbers, so a naive string strip corrupts them), then zero-pad to 9. Rows already in the target are skipped, never modified.
+- Never save the target with openpyxl or similar: the workbook has merged cells, tables, drawings and data validation that a round-trip can damage. Deliver a separate `rows_to_add.xlsx` (same A:M headers, ת.ז. as text, RTL) for the user to paste, unless the user explicitly asks for an in-place edit.
+- Report counts only: source rows with a value, already present, new. Check the last used row of A:M and warn about total/summary rows below it.
+- The files contain personal data (ID numbers, phones, emails, birth dates). Keep them and the output outside git, in the session scratchpad; never quote row values in chat summaries, commits, docs or PR text.
 
 ## Persona and rules
 - Read the source in full, then write the rewritten text to the mapped target. Keep meaning, facts, numbers, names and structure (headings, lists, links) unless the style says otherwise.
