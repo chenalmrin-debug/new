@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>almari – automation post</title>
+<style>
+  /* Brand tokens – swap these to match the almari brand */
+  :root {
+    --bg: #F3EEE4;
+    --ink: #16130F;
+    --muted: #7A7266;
+    --accent: #FF5A2C;
+    --card: #FFFFFF;
+    --line: #16130F;
+    --ok: #1F9D61;
+    --font: "Heebo", "Assistant", "Noto Sans Hebrew", "DejaVu Sans", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #888; }
+  .post {
+    width: 1080px; height: 1350px; background: var(--bg); color: var(--ink);
+    font-family: var(--font); position: relative; overflow: hidden; padding: 72px 80px;
+  }
+  .post::before { /* dot grid */
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(22,19,15,.13) 2px, transparent 2px);
+    background-size: 40px 40px; z-index: 0;
+  }
+  .post > * { position: relative; z-index: 1; }
+
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 46px; font-weight: 800; letter-spacing: -1px; direction: ltr; }
+  .logo i { color: var(--accent); font-style: normal; }
+  .tag {
+    font-size: 24px; font-weight: 600; border: 2.5px solid var(--ink);
+    padding: 8px 22px; border-radius: 100px; background: var(--card);
+  }
+
+  h1 { font-size: 96px; line-height: 1.02; font-weight: 900; margin-top: 44px; letter-spacing: -2px; }
+  h1 span { color: var(--accent); }
+  .sub { font-size: 32px; color: var(--muted); margin-top: 18px; font-weight: 500; }
+
+  /* flow */
+  .flow { margin-top: 40px; display: flex; flex-direction: column; align-items: stretch; }
+  .node {
+    background: var(--card); border: 3px solid var(--line); border-radius: 26px;
+    padding: 16px 28px; display: flex; align-items: center; gap: 24px;
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .node .ic {
+    width: 76px; height: 76px; border-radius: 20px; display: grid; place-items: center;
+    font-size: 40px; background: var(--bg); border: 2.5px solid var(--ink); flex: none;
+  }
+  .node .k { font-size: 20px; font-weight: 700; color: var(--muted); letter-spacing: 1px; direction: ltr; text-align: right; }
+  .node .t { font-size: 38px; font-weight: 800; margin-top: 2px; }
+  .node .st { margin-inline-start: auto; font-size: 34px; color: var(--ok); font-weight: 800; }
+  .node.trigger { background: var(--accent); color: #fff; }
+  .node.trigger .k { color: rgba(255,255,255,.8); }
+  .node.trigger .ic { background: #fff; color: var(--ink); }
+  .node.trigger .st { color: #fff; }
+
+  .wire { height: 30px; width: 0; border-inline-start: 4px dashed var(--ink); margin-inline-end: 66px; align-self: flex-start; position: relative; }
+  .wire::after {
+    content: ""; position: absolute; bottom: -6px; right: -13px; width: 0; height: 0;
+    border: 11px solid transparent; border-top: 14px solid var(--ink); border-bottom: 0;
+  }
+
+  .foot { position: absolute; left: 80px; right: 80px; bottom: 64px; display: flex; justify-content: space-between; align-items: center; }
+  .foot .l { font-size: 30px; font-weight: 700; }
+  .foot .l b { color: var(--accent); }
+  .foot .r { font-size: 24px; color: var(--muted); direction: ltr; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="post">
+  <div class="top">
+    <div class="logo">almari<i>.</i></div>
+    <div class="tag">⚙︎ אוטומציה בפעולה</div>
+  </div>
+
+  <h1>הלקוח כתב<br>ב־23:47.<br><span>אתה ישנת.</span></h1>
+  <p class="sub">והאוטומציה? היא עבדה בשבילך.</p>
+
+  <div class="flow">
+    <div class="node trigger">
+      <div class="ic">📩</div>
+      <div><div class="k">TRIGGER</div><div class="t">ליד חדש נכנס מהאתר</div></div>
+      <div class="st">23:47:00</div>
+    </div>
+    <div class="wire"></div>
+    <div class="node">
+      <div class="ic">🗂</div>
+      <div><div class="k">ACTION 01</div><div class="t">מתעדכן אוטומטית ב־CRM</div></div>
+      <div class="st">✓</div>
+    </div>
+    <div class="wire"></div>
+    <div class="node">
+      <div class="ic">💬</div>
+      <div><div class="k">ACTION 02</div><div class="t">הודעת וואטסאפ אישית נשלחת</div></div>
+      <div class="st">✓</div>
+    </div>
+    <div class="wire"></div>
+    <div class="node">
+      <div class="ic">📅</div>
+      <div><div class="k">ACTION 03</div><div class="t">פגישה נקבעת ביומן</div></div>
+      <div class="st">23:47:03</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="l">3 שניות. אפס מגע יד. <b>אפס תירוצים.</b></div>
+    <div class="r">almari.co.il</div>
+  </div>
+</div>
+</body>
+</html>
