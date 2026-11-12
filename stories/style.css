@@ -1,0 +1,13 @@
+@font-face{font-family:Heebo;font-weight:500;src:url(heebo-500.ttf)}
+@font-face{font-family:Heebo;font-weight:800;src:url(heebo-800.ttf)}
+@font-face{font-family:Heebo;font-weight:900;src:url(heebo-900.ttf)}
+:root{--bg:#0b0613;--pink:#ff2e93;--cyan:#27e1ff;--gold:#ffc84a;--ink:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;background:var(--bg);font-family:Heebo,sans-serif;color:var(--ink);direction:rtl;overflow:hidden}
+.story{position:relative;width:1080px;height:1920px;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.55}
+.badge{position:absolute;top:90px;right:70px;font-weight:800;font-size:38px;letter-spacing:1px;padding:14px 30px;border:3px solid var(--cyan);color:var(--cyan);border-radius:60px}
+.brand{position:absolute;top:90px;left:70px;font-weight:900;font-size:46px;direction:ltr}
+.age{position:absolute;bottom:60px;left:0;right:0;text-align:center;font-size:28px;opacity:.7;font-weight:500}
+.cta{position:absolute;bottom:130px;left:70px;right:70px;background:linear-gradient(90deg,var(--pink),#ff6a3d);border-radius:70px;padding:36px;text-align:center;font-weight:900;font-size:56px;box-shadow:0 20px 60px #ff2e9355}
+h1{font-weight:900;line-height:1.02}
